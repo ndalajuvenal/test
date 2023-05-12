@@ -1,0 +1,41 @@
+{% extends 'fdm/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+   .card:hover{
+box-shadow: 5px 5px 20px rgba(255,0,0,0.4);
+transform: translateY(-3%);
+}
+</style>
+<div class="container bg-light shadow">
+   <h3>Search</h3>
+   <div class="row">
+      {% for item in article %}
+      <div class="col-12 col-md-6 col-lg-3">
+         <div class="card shadow mt-2 mb-1" style="height: 360px;cursor: default;transition: all 400ms ease;" >
+            <div class="card-header card-img-top">
+               {% if item.photo %}
+               <a class=" " href="{% url 'detail' item.id %}" > <img style="object-fit: cover; display: block;" src="{{item.photo.url}}" class="card-img-top " alt="..." height="190px" width="auto"></a>
+               {% endif %}
+            </div>            
+            <div class="card-body text-center" >
+               <h5 class="card-title" style="font-size: smaller;"><strong>{{item.titre | safe}}</strong>..</h5>
+               <p>{{item.created_at}}</p>
+            </div>
+            <div class="text-center mb-1 card-footer">
+               <a class="btn" href="{% url 'detail' item.id %}"><i class="fa-sharp fa-solid fa-eye "></i></a>
+               {% if item.user == request.user %}
+               <a class="btn" href="{% url 'Article_update' item.id %}"> <i class="far fa-edit fa-lg"></i></a>
+               <a class="btn" href="{% url 'Article_delete' item.id %}"> <i
+                  class="far fa-trash-alt fa-lg text-danger float-right"></i></a>
+               {% endif %}
+            </div>
+         </div>
+      </div>
+      {% endfor %}
+   </div>
+</div>
+
+
+
+{% endblock content %}

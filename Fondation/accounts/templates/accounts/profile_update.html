@@ -1,0 +1,123 @@
+{% extends 'fdm/base.html' %}
+{% block title %}
+login
+{% endblock title %}
+
+{% block content %}
+<style>
+  .input {
+    max-width: 590px;
+    height: 40px;
+    padding: 10px;
+    /* text-align: center; */
+    border: 2px solid white;
+    border-radius: 5px;
+    border-color: rgb(250, 205, 225);
+    /* box-shadow: 3px 3px 2px rgb(249, 255, 85); */
+  }
+
+  .input:focus {
+    color: rgb(0, 25, 25);
+    outline-color: rgb(0, 25, 205);
+    box-shadow: -3px -3px 15px rgb(0, 255, 25);
+    transition: .1s;
+    transition-property: box-shadow;
+  }
+</style>
+<div class="container col-md-8 ">
+  <form method="post" autocomplete="off" enctype="multipart/form-data">
+    <div class="card" style="box-shadow: -3px -3px 15px rgb(10, 25, 255);">
+      <div class="card-header">
+        <h3 class="text-center">register</h3>
+      </div>
+      <center>
+        <div class="card-body col-md-8">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-12">
+              {{form.username}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              {{form.password1}}
+            </div>
+            <div class="col-md-6">
+              {{form.password2}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              {{profile.birthday}}
+            </div>
+            <div class="col-md-4">
+              {{profile.phone}}
+            </div>
+            <div class="col-md-4 mt-3">
+              {{profile.genre}}
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                {{profile.photo}}
+              </div>
+            </div>
+          </div>
+      </center>
+      <div class="card-footer text-center">
+        <button type="submit" class="btn btn-outline-success col-md-8 mb-2 btn-block">login</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog  text-center" role="document">
+    <div class="modal-content " style="height: 700px;">
+      <div class="modal-header ">
+        <h5 class="modal-title " id="exampleModalLabel">Login</h5>
+      </div>
+      <div class="modal-body">
+        <section class="vh-80" style="background-color: #9A616D;">
+          <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col col-xl-10">
+                <div class="card mt-2 shadow" style="border-radius: 1rem;">
+                  <div class="row g-0">
+
+                    <div class=" d-flex ">
+                      <div class="card-body p-4 p-lg-5 text-black">
+                        <form method="post" class="container" autocomplete="off" enctype="multipart/form-data">
+                          {{form.username}}
+                          {{form.password}}
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  let selectFields = document.getElementsByTagName('select')
+  let inputFields = document.getElementsByTagName('input')
+  let textareaFields = document.getElementsByTagName('textarea')
+  for (let i = 0; i < inputFields.length; i++) {
+      inputFields[i].classList.add('form-control')
+  }
+  for (let i = 0; i < selectFields.length; i++) {
+      selectFields[i].classList.add('form-select')
+  }
+ 
+</script>
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends 'fdm/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container col-md-10 mx-auto"
+    style="border-radius: 30px;box-shadow: rgba(0,0,0,0.24) 0px 3px 8px;height: auto;padding: 30px 20px 20px 20px;">
+<div >
+    <form action="" method="post" autocomplete="off" enctype="multipart/form-data" >
+        {% if form.subject.errors %}
+           {% for error in form.subject.errors %}
+            <p class="text-danger"><strong>{{ error }}</strong></p>
+           {% endfor %}
+        {% endif %}
+
+        {% for field in form %}
+            {% if field.errors %}
+               {% for error in field.errors %}
+               <p class="text-danger"><strong>{{ error }}</strong></p>
+               {% endfor %}
+            {% endif %}
+        {% endfor %}
+       
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form.media }}
+
+        <div class="row">
+            <div class="col-lg-4 col-md-12  text-center">
+                <button type="submit" class="btn btn-outline-success"><i class="fas fa-database"></i>Valider</button>
+            </div>
+            <div class="col-lg-4 col-md-12  text-center">
+                {% if article.photo %}
+                <img src="{{article.photo.url}}"   width= "50%" height="auto" >
+                {% endif %}
+            </div>
+            <div class="col-lg-4 col-md-12  text-center">
+               <a href="{% url 'article' %}" class="btn btn-outline-info">
+                 <i class="far fa-stream"><i class="fas fa-stream"></i>Tous les articles</i>
+               </a>
+            </div>
+          
+         </div>
+    </form>
+</div>
+<script>
+    let selectFields = document.getElementsByTagName('select')
+    let inputFields = document.getElementsByTagName('input')
+    let textareaFields = document.getElementsByTagName('textarea')
+    for (let i = 0; i < inputFields.length; i++) {
+        inputFields[i].classList.add('form-control')
+    }
+    for (let i = 0; i < selectFields.length; i++) {
+        selectFields[i].classList.add('form-select')
+    }
+   
+</script>
+</div>
+
+
+{% endblock content %}
